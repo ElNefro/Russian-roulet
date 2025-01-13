@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cstdlib>
 
 void MainMenu();
@@ -68,72 +68,92 @@ void Rules()
     
 }
 
-void LogIn()
-{
-    system("cls");
-
-    int choise_player_count;
-
-    do
-    {
-        std::cout << "\n\t\t Введите кол-во игроков (макс - 6)\n\n";
-        std::cout << "Ввод: ";
-
-        std::cin >> choise_player_count;
-
-        if (choise_player_count == 1)
-        {
-            player_count = 1;
-        }
-        else if (choise_player_count == 2)
-        {
-            player_count = 2;
-        }
-        else if (choise_player_count == 3)
-        {
-            player_count = 3;
-        }
-        else if (choise_player_count == 4)
-        {
-            player_count = 4;
-        }
-        else if (choise_player_count == 5)
-        {
-            player_count = 5;
-        }
-        else if (choise_player_count == 6)
-        {
-            player_count = 6;
-        }
-        else
-        {
-            system("cls");
-            std::cout << "\n\t\tТы Дурак!?\n\n";
-            continue;
-        }
-
-    } while (true);
-}
-
-
 
 void Game()
 {
     system("cls");
 
+    int shout_count = 1;
+    int choise;
+    bool lose = true;
+    int lose_count = 0;
 
-
-    int shoot = rand() % 6 + 1;
-
-    for (int i = 0; i < shoot; i++)
+    do
     {
+        if (lose_count == 2)
+        {
+            lose = false;
+        }
+
+        int shoot = rand() % 6 + 1;
+
+        std::cout << "Раунд №" << shout_count << "\n\n";
+
         std::cout << "\n\t\t Делайте выбор: \n\n";
         std::cout << "\t 1) Выстрелить\n";
         std::cout << "\t 2) Пропуск хода\n\n";
         std::cout << "Ввод: ";
-    }
+
+        std::cin >> choise;
+
+        if (choise == 1)
+        {
+            if (shoot == 1)
+            {
+                system("cls");
+                break;
+            }
+            else
+            {
+                system("cls");
+                continue;
+            }
+
+        }
+        else if (choise == 2 && lose == true)
+        {
+            system("cls");
+            lose_count++;
+            continue;
+        }
+        else
+        {
+            system("cls");
+            std::cout << "\n\t\t Ты дурак!?\n\n";
+            continue;
+        }
+
+        
+
+
+    } while (true);
    
-   
+    do
+    {
+        std::cout << "\t\t\n\nСпасибо за игру)\n\n";
+        std::cout << "\t\tХотите продолжить игру?\n\n";
+        std::cout << "\t1) Да\n";
+        std::cout << "\t2) Нет\n\n";
+        std::cout << "Ввод: ";
+        std::cin >> choise;
+        if (choise == 1)
+        {
+            system("cls");
+            MainMenu();
+        }
+        else if (choise == 2)
+        {
+            system("cls");
+            std::cout << "\t\t\n\nЖдем вас снова)\n\n";
+            break;
+        }
+        else
+        {
+            system("cls");
+            std::cout << "\n\t\t Ты дурак!?\n\n";
+            continue;
+        }
+    } while (true);
 
 
 }
